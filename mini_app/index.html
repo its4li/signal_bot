@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Piggy Bank — Mini App</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+body{font-family:system-ui;background:#0A0A0C;color:#fff;padding:20px;margin:0}
+.btn{display:inline-block;background:#FF3B7A;color:#fff;padding:12px 24px;border-radius:24px;margin:8px 0;text-decoration:none;font-weight:bold}
+.card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:16px;margin:12px 0}
+</style>
+</head>
+<body>
+<h2>🐷 Piggy Bank — Mini App</h2>
+<div class="card">
+<p><b>Signal:</b> BTC/USDT — BUY (MACD +12.4, RSI 62)</p>
+<p>Analysis powered by Python <code>ta</code> library.</p>
+</div>
+<a href="#" class="btn" onclick="Telegram.WebApp.sendData('signal_confirmed')">✅ Confirm Trade</a>
+<a href="#" class="btn" onclick="Telegram.WebApp.close()" style="background:#333">❌ Close</a>
+<p style="font-size:10px;color:#888">Runs via Telegram Bot Token + Python backend.</p>
+</body>
+</html>

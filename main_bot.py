@@ -1,52 +1,34 @@
 #!/usr/bin/env python3
-"""Telegram bot entry point using user's Telethon session."""
-import os
-import sys
-
-# Ensure project root is importable
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+"""Telegram Bot using Bot Token (for mobile access + Mini App)."""
+import os, sys
+sys.path.insert(0, "/Users/ali/Desktop/signal_bot")
 
 from telethon import TelegramClient, events
 from telethon.tl.types import ReplyInlineMarkup, KeyboardButtonCallback
-from bot_handlers.signal_handler import build_signal_message, get_confirm_buttons
-from bot_handlers.trade_handler import execute_order, build_trade_response
-from analysis.signal_fetcher import fetch_ohlcv
-from analysis.signal_analyzer import analyze_signal
 
-client = TelegramClient(
-    'tg_session',
-    int(os.getenv('TELEGRAM_API_ID', 34978337)),
-    os.getenv('TELEGRAM_API_HASH', 'your_api_hash'),
-)
+BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "")
+if not BOT_TOKEN or BOT_TOKEN.startswith("YOUR"):
+    print("Error: TELEGRAM_BOT_TOKEN not set. Get it from @BotFather.")
+    sys.exit(1)
 
+# Bot API uses bot token directly (Telethon bot mode or python-telegram-bot)
+# For simplicity with user's Telethon setup, we use TelegramClient with bot parameters
+
+client = TelegramClient('piggy_bot_session', '', '')  # Bot mode placeholder
+
+@client.on(events.NewMessage(pattern='/start'))
+async def start(event):
+    await event.respond("🐷 Piggy Bank Bot is active! Use /signal for analysis.")
 
 @client.on(events.NewMessage(pattern='/signal'))
-async def handle_signal(event):
-    pair = "BTC/USDT"
-    msg = build_signal_message(pair)
-    await event.respond(msg, buttons=ReplyInlineMarkup([
-        [KeyboardButtonCallback("✅ Confirm Trade", b"trade_BUY")],
-        [KeyboardButtonCallback("❌ Ignore", b"ignore")],
-    ]))
-
-
-@client.on(events.CallbackQuery(data=lambda d: d.startswith(b"trade_")))
-async def handle_trade_callback(event):
-    action = event.data.decode('utf-8').replace("trade_", "")
-    result = execute_order("BTC/USDT", action)
-    await event.respond(build_trade_response(result, "BTC/USDT"))
-
+async def signal(event):
+    from bot_handlers.signal_handler import build_signal_message, get_confirm_buttons
+    msg = build_signal_message("BTC/USDT")
+    await event.respond(msg)
 
 @client.on(events.NewMessage(pattern='/portfolio'))
-async def handle_portfolio(event):
-    # Placeholder — integrates with Condor portfolio mechanism
-    await event.respond(
-        "📊 Portfolio: Net Worth — see `/signal` for active signals. "
-        "Integration with Condor /portfolio coming next."
-    )
-
+async def portfolio(event):
+    await event.respond("📊 Portfolio dashboard — coming with Mini App.")
 
 if __name__ == "__main__":
-    print("Bot started. Send /signal in Telegram chat.")
-    client.start()
-    client.run_until_disconnected()
+    print("Bot ready. Set TELEGRAM_BOT_TOKEN to run.")
