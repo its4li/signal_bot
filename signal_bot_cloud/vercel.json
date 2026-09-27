@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "builds": [{"src": "api/index.py", "use": "@vercel/python"}],
+  "routes": [
+    {"src": "/api/(.*)", "dest": "/api/index.py"},
+    {"src": "/(.*)", "dest": "/mini_app/index.html"}
+  ],
+  "env": {
+    "TELEGRAM_BOT_TOKEN": "@telegram_bot_token",
+    "TELEGRAM_WEBHOOK_URL": "https://your-cloudflare-domain.com/api"
+  }
+}

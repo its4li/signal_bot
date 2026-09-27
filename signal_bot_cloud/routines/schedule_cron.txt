@@ -1,0 +1,5 @@
+# Auto-signal routine — runs hourly
+# Add to user's crontab: crontab -e
+# 0 * * * * /Users/ali/Desktop/signal_bot/venv/bin/python /Users/ali/Desktop/signal_bot/routines/auto_signal.py >> /Users/ali/Desktop/signal_bot/auto_signal.log 2>&1
+# Or for a shorter interval (every 30 min):
+# */30 * * * * /Users/ali/Desktop/signal_bot/venv/bin/python /Users/ali/Desktop/signal_bot/routines/auto_signal.py >> /Users/ali/Desktop/signal_bot/auto_signal.log 2>&1
