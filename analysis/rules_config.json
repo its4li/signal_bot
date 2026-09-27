@@ -1,0 +1,9 @@
+{
+  "pairs": ["BTC/USDT", "ETH/USDT"],
+  "rules": {
+    "macd_diff_threshold": 0,
+    "rsi_buy_above": 50,
+    "rsi_sell_below": 30
+  },
+  "confidence_min": 0.5
+}
