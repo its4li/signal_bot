@@ -9,3 +9,9 @@
    TELEGRAM_BOT_TOKEN=123456:ABC-DEF...
 
 سپس ادامه بده.
+
+=== قدم ۳ (Cloud) ✅ ===
+- vercel.json: serverless endpoint (Python ta + webhook) + Mini App routing
+- api/index.py: handler for Vercel Python runtime
+- mini_app/index.html: رابط موبایل (بدون لپ‌تاپ)
+- wrangler.toml: Cloudflare Workers reference
