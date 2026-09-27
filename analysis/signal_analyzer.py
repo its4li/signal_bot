@@ -1,3 +1,6 @@
+# Added config import
+import sys, os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import pandas as pd
 from ta.trend import MACD
 from ta.momentum import RSIIndicator
@@ -46,3 +49,4 @@ def analyze_signal(df: pd.DataFrame, pair: str = "BTC/USDT", config_path: str = 
         },
         "message": f"{pair}: {action} (MACD={macd_diff:.2f}, RSI={rsi_val:.1f})",
     }
+
